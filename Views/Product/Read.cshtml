@@ -1,0 +1,19 @@
+﻿@using CrudLoginSignup.Models.product
+@model List<Product>
+@{
+}
+@{
+    foreach(var i in Model)
+    {
+        <div class="card">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@i.Name</h5>
+                <p class="card-text">@i.Price</p>
+                <a asp-action="GetSingle" asp-controller="Product" class="btn btn-primary" asp-route-id="@i.Id">Go somewhere</a>
+            </div>
+        </div>
+    }
+}
