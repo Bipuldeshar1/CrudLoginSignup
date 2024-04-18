@@ -1,11 +1,32 @@
 ﻿@using CrudLoginSignup.Models.product
+@using CrudLoginSignup.Models.user
+@using Microsoft.AspNetCore.Identity
 @model Product
+@inject SignInManager<User> signinManager
+@inject UserManager<User> userManager
 @{
+}
+@if (Convert.ToString(@userManager.GetUserId(User)) != Convert.ToString(Model.UID))
+{
+   // Console.WriteLine(Convert.ToString(@userManager.GetUserId(User)) + " xxxxxxxxxxxxxxx " + Convert.ToString(Model.User.Id));
+    <h1>@Model.Name</h1>
+    <h1>@Model.Description</h1>
+    <h1>@Model.Price</h1>
+    <h1>@Model.User.Name</h1>
+    
+  
+}
+else
+{
+     <h1>@Model.Name</h1>
+    <h1>@Model.Description</h1>
+    <h1>@Model.Price</h1>
+    <h1>@Model.User.Name</h1>
+
+    <a asp-route-id="@Model.Id" asp-controller="Product" asp-action="Delete">delete</a>
+    <a asp-route-id="@Model.Id" asp-controller="Product" asp-action="Edit">Edit</a>
+    
 }
 
 
-<h1>@Model.Name</h1>
-<h1>@Model.Description</h1>
-<h1>@Model.Price</h1>
-<h1>@Model.User.Name</h1>
 

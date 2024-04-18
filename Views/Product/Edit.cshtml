@@ -1,0 +1,37 @@
+﻿@using CrudLoginSignup.Models.product
+@using CrudLoginSignup.Models.user
+@using Microsoft.AspNetCore.Identity
+@model Product
+@* @User.Identity!.Name *@
+@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+@{
+}
+
+    <form asp-action="Edit" method="post">
+        <div class="mb-3">
+            <label>Name </label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Description </label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Price </label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <p> seller Name: @User.Identity.Name</p>
+
+        <div class="mb-3">
+
+            <input asp-for="UID" type="hidden" class="form-control" value="@userManager.GetUserId(User)" />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+

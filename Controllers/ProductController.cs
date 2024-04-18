@@ -43,5 +43,44 @@ namespace CrudLoginSignup.Controllers
             var product = context.products.Include(e => e.User).SingleOrDefault(x => x.Id == id);
             return View(product);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var product =await context.products.FindAsync(id);
+            if (product == null)
+            {
+                return RedirectToAction("Read");
+            }
+            return View(product);
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> Edit(int id,Product p) {
+            var product= await context.products.FindAsync(id);
+            if (product == null)
+            {
+                return RedirectToAction("read");
+            }
+            product.Name = p.Name;
+            product.Description = p.Description;
+            product.Price=p.Price;
+            await context.SaveChangesAsync();
+            return RedirectToAction("read");
+        }
+       
+
+     
+        public async Task<IActionResult> Delete(int id)
+        {
+            var product = await context.products.FindAsync(id);
+            if (product == null)
+            {
+                return RedirectToAction("Read");
+            }
+            context.products.Remove(product);
+            context.SaveChanges(true);
+            return RedirectToAction("Read");
+        }
     }
 }
